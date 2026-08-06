@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+mockup
+.git
+.github
+*.md
+.vscode
+.idea
+.DS_Store
+*.log

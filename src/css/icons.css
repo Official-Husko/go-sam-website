@@ -1,0 +1,99 @@
+/*
+ * Hand-picked subset of the Font Awesome 7 Pro package in ./fontawesome-pro —
+ * only the icons this site actually uses, instead of the full multi-thousand-icon library.
+ */
+
+@font-face {
+  font-family: 'Font Awesome 7 Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url('./fontawesome-pro/webfonts/fa-solid-900.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Font Awesome 7 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fontawesome-pro/webfonts/fa-brands-400.woff2') format('woff2');
+}
+
+.fa-solid,
+.fa-brands {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+.fa-solid {
+  font-family: 'Font Awesome 7 Pro';
+  font-weight: 900;
+}
+.fa-brands {
+  font-family: 'Font Awesome 7 Brands';
+  font-weight: 400;
+}
+.fa-solid::before,
+.fa-brands::before {
+  content: var(--fa);
+}
+
+.fa-download {
+  --fa: '\f019';
+}
+.fa-github {
+  --fa: '\f09b';
+}
+.fa-windows {
+  --fa: '\f17a';
+}
+.fa-linux {
+  --fa: '\f17c';
+}
+.fa-table-cells {
+  --fa: '\f00a';
+}
+.fa-trophy {
+  --fa: '\f091';
+}
+.fa-chart-simple {
+  --fa: '\e473';
+}
+.fa-arrows-rotate {
+  --fa: '\f021';
+}
+.fa-shield-halved {
+  --fa: '\f3ed';
+}
+.fa-bell {
+  --fa: '\f0f3';
+}
+.fa-check {
+  --fa: '\f00c';
+}
+.fa-triangle-exclamation {
+  --fa: '\f071';
+}
+.fa-layer-group {
+  --fa: '\f5fd';
+}
+.fa-cube {
+  --fa: '\f1b2';
+}
+.fa-plug {
+  --fa: '\f1e6';
+}
+.fa-file-zipper {
+  --fa: '\f1c6';
+}
+.fa-scale-balanced {
+  --fa: '\f24e';
+}
+.fa-arrow-up-right-from-square {
+  --fa: '\f08e';
+}
+.fa-tag {
+  --fa: '\f02b';
+}
