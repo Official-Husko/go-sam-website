@@ -21,7 +21,9 @@ jobs:
           sha="$(git rev-parse --short HEAD)"
           image="$(echo "${GITHUB_REPOSITORY,,}" | tr '/' '-')"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "image=$image" >> "$GITHUB_OUTPUT"
           echo "tag=${image}:${sha}" >> "$GITHUB_OUTPUT"
+          echo "latest_tag=${image}:latest" >> "$GITHUB_OUTPUT"
           echo "archive=${image}-${sha}.tar.gz" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
@@ -32,12 +34,16 @@ jobs:
         with:
           context: .
           load: true
-          tags: ${{ steps.vars.outputs.tag }}
+          tags: |
+            ${{ steps.vars.outputs.tag }}
+            ${{ steps.vars.outputs.latest_tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Save image to a tarball
-        run: docker save '${{ steps.vars.outputs.tag }}' | gzip > '${{ steps.vars.outputs.archive }}'
+        run: |
+          docker save '${{ steps.vars.outputs.tag }}' '${{ steps.vars.outputs.latest_tag }}' \
+            | gzip > '${{ steps.vars.outputs.archive }}'
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2

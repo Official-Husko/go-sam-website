@@ -29,32 +29,35 @@ npm run preview   # preview the production build locally
 
 ## Docker
 
-The site builds to static files and is served by nginx. To build and run it locally:
+The site builds to static files and is served by nginx. Releases are distributed as a Docker image tarball (see CI/CD below), not pushed to a registry, so running one is a load + compose up:
+
+```bash
+docker load < official-husko-go-sam-website-<sha>.tar.gz
+docker compose up
+```
+
+That loads two tags — `official-husko-go-sam-website:<sha>` and `official-husko-go-sam-website:latest` — and `docker-compose.yml` runs the `:latest` one on `http://localhost:8080`. `docker-compose.yml` does not build anything itself; it only ever runs an image that's already been loaded.
+
+To build the image from source yourself instead:
 
 ```bash
 docker build -t go-sam-website .
 docker run --rm -p 8080:80 go-sam-website
 ```
 
-Then open `http://localhost:8080`.
-
 - `Dockerfile` — multi-stage build: Node builds the static site, then an `nginx:alpine` image serves it
 - `docker/nginx.conf` — SPA fallback routing, gzip, and long-lived caching for hashed build assets
+- `docker-compose.yml` — runs the prebuilt `official-husko-go-sam-website:latest` image on port 8080
 
 ## CI/CD
 
 On every push to `main`, [`.github/workflows/release.yml`](.github/workflows/release.yml):
 
-1. Builds the Docker image
-2. Saves it to a `.tar.gz` with `docker save`
+1. Builds the Docker image, tagged both `<repo>:<short-sha>` and `<repo>:latest`
+2. Saves both tags into one `.tar.gz` with `docker save`
 3. Publishes a GitHub Release tagged with the short commit SHA, with that tarball attached as the release asset
 
-No container registry is involved. To deploy a given build (e.g. from release tag `abc1234`):
-
-```bash
-docker load < official-husko-go-sam-website-abc1234.tar.gz
-docker run --rm -p 8080:80 official-husko-go-sam-website:abc1234
-```
+No container registry is involved — `docker load` on the tarball, as shown above, is all a deployment needs.
 
 ## License
 
