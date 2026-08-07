@@ -477,7 +477,7 @@ td:first-child {
   gap: 64px;
   align-items: start;
 }
-.section--split h3 {
+.subheading {
   font-size: 22px;
   margin: 0 0 18px;
 }

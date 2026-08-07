@@ -148,7 +148,7 @@ export function Download() {
 
       <section class="section" ref={build.ref}>
         <div class={build.class}>
-          <h3>Building from source</h3>
+          <h2 class="subheading">Building from source</h2>
           <pre class="code-block">
             <code>
               <CodeLine
@@ -175,7 +175,7 @@ export function Download() {
 
       <section class="section" ref={cross.ref}>
         <div class={cross.class}>
-          <h3>Cross-compiling for Windows (from Linux/macOS)</h3>
+          <h2 class="subheading">Cross-compiling for Windows (from Linux/macOS)</h2>
           <p class="section-lead">
             Building the GUI requires cgo for Fyne's rendering, so you'll need a Windows C cross-compiler such as
             mingw-w64.

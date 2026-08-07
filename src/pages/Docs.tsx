@@ -41,7 +41,7 @@ export function Docs() {
 
       <section class="section" ref={config.ref}>
         <div class={config.class}>
-          <h3>Configuration</h3>
+          <h2 class="subheading">Configuration</h2>
           <div class="table-wrap">
             <table>
               <thead>
@@ -89,7 +89,7 @@ export function Docs() {
 
       <section class="section" ref={credits.ref}>
         <div class={credits.class}>
-          <h3>Credits &amp; license</h3>
+          <h2 class="subheading">Credits &amp; license</h2>
           <p class="section-lead">
             GO-SAM is an independent Go reimplementation inspired by and ported from Steam Achievement Manager by
             Rick &quot;Gibbed&quot;, released under the zlib license. It is licensed under that same zlib license as

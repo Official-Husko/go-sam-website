@@ -1,5 +1,7 @@
 # GO-SAM Website
 
+**Live site: [go-sam.lonewolves.dev](https://go-sam.lonewolves.dev/)**
+
 The showcase website for [GO-SAM](https://github.com/Official-Husko/GO-SAM), a modern, cross-platform port of Steam Achievement Manager written in Go. This repo is just the site (overview, download, and docs pages) — for the actual application, see the [GO-SAM repository](https://github.com/Official-Husko/GO-SAM).
 
 ## Tech stack
@@ -26,6 +28,12 @@ npm run dev       # start the dev server
 npm run build     # type-check and build to dist/
 npm run preview   # preview the production build locally
 ```
+
+## SEO
+
+This is a client-only SPA (no SSR), so `npm run build` runs an extra step after `vite build`: [`scripts/prerender-meta.mjs`](scripts/prerender-meta.mjs) clones the built `index.html` into `dist/download/index.html` and `dist/docs/index.html`, swapping in route-specific `<title>`, description, canonical URL, and Open Graph/Twitter tags. nginx's `try_files $uri $uri/ /index.html` (see `docker/nginx.conf`) serves these directly for a request to e.g. `/download`, so search engines and link-preview bots that don't execute JS still see correct per-page metadata instead of every route sharing the homepage's.
+
+Also included: `public/robots.txt`, `public/sitemap.xml`, a JSON-LD `SoftwareApplication` block in `index.html`, and a generated `public/og-image.png` used for link previews.
 
 ## Docker
 
